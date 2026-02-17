@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Search</h2>
+
+<form id="filtersForm" class="filters" method="get">
+  <input id="q" name="q" placeholder="keyword (EGFR, ADMET, KG...)" value="{{ filters.q }}"/>
+
+  <select name="primary_bu" class="auto-submit">
+    <option value="">Primary BU (all)</option>
+    {% for b in BU_OPTIONS %}
+      <option value="{{ b }}" {% if filters.primary_bu==b %}selected{% endif %}>{{ b }}</option>
+    {% endfor %}
+  </select>
+
+  <select name="asset_type" class="auto-submit">
+    <option value="">Asset type (all)</option>
+    {% for t in ASSET_TYPES %}
+      <option value="{{ t }}" {% if filters.asset_type==t %}selected{% endif %}>{{ t }}</option>
+    {% endfor %}
+  </select>
+
+  <select name="license_flag" class="auto-submit">
+    <option value="">License (all)</option>
+    {% for l in LICENSE_FLAGS %}
+      <option value="{{ l }}" {% if filters.license_flag==l %}selected{% endif %}>{{ l }}</option>
+    {% endfor %}
+  </select>
+
+  <select name="use_case" class="auto-submit">
+    <option value="">Use case (all)</option>
+    {% for u in DEFAULT_USE_CASES %}
+      <option value="{{ u }}" {% if filters.use_case==u %}selected{% endif %}>{{ u }}</option>
+    {% endfor %}
+  </select>
+
+  <label>Min readiness</label>
+  <input type="number" min="0" max="5" name="min_ready" class="auto-submit" value="{{ filters.min_ready }}" style="width:70px"/>
+</form>
+
+<p class="muted">Results: {{ items|length }}</p>
+
+{% for r in items %}
+  <div class="card">
+    <div class="card-left">
+      <div class="title">{{ r.name }}</div>
+      <div class="summary">{{ r.short_summary }}</div>
+
+      <div class="meta">
+        <span><b>Primary:</b> {{ r.primary_bu }}</span>
+        {% if r.secondary_bus and r.secondary_bus|length>0 %}
+          <span><b>Secondary:</b> {{ r.secondary_bus|join(", ") }}</span>
+        {% endif %}
+        <span><b>Type:</b> {{ r.asset_type }}</span>
+        {% if r.use_cases and r.use_cases|length>0 %}
+          <span><b>Use cases:</b> {{ r.use_cases|join(", ") }}</span>
+        {% endif %}
+        <span><b>Owner:</b> {{ r.owner or "-" }}</span>
+        <span><b>Last validated:</b> {{ r.last_validated_on or "-" }}</span>
+      </div>
+
+      <div><a href="{{ r.url }}" target="_blank">{{ r.url }}</a></div>
+
+      {% if r.excelra_leverage %}
+        <div class="notes"><b>Excelra leverage:</b> {{ r.excelra_leverage }}</div>
+      {% endif %}
+
+      {% if r.notes %}
+        <div class="notes"><b>Notes:</b> {{ r.notes }}</div>
+      {% endif %}
+    </div>
+
+    <div class="card-right">
+      <div class="badge {{ r.license_flag|lower }}">{{ r.license_flag }}</div>
+      <div class="scores">
+        <div>Readiness: <b>{{ r.readiness_score }}</b></div>
+        <div>Engineering: <b>{{ r.engineering_score }}</b></div>
+        <div>Maintenance: <b>{{ r.maintenance_score }}</b></div>
+      </div>
+      {% if r.license_notes %}<div class="muted">{{ r.license_notes }}</div>{% endif %}
+
+      <div class="actions">
+        <a class="btn" href="{{ url_for('edit', asset_id=r.id) }}">Edit</a>
+        <form method="post" action="{{ url_for('delete', asset_id=r.id) }}" onsubmit="return confirm('Delete this asset?');">
+          <button class="btn danger" type="submit">Delete</button>
+        </form>
+      </div>
+      <div class="muted">ID: {{ r.id }}</div>
+    </div>
+  </div>
+{% endfor %}
+
+<script>
+  const form = document.getElementById("filtersForm");
+  const autos = document.querySelectorAll(".auto-submit");
+  const q = document.getElementById("q");
+
+  autos.forEach(el => el.addEventListener("change", () => form.submit()));
+
+  let t = null;
+  q.addEventListener("input", () => {
+    if (t) clearTimeout(t);
+    t = setTimeout(() => form.submit(), 400);
+  });
+</script>
+{% endblock %}
