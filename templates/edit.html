@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Edit asset (ID: {{ a.id }})</h2>
+
+<form method="post" class="form">
+  <label>Name*</label>
+  <input name="name" value="{{ a.name }}" required>
+
+  <label>URL*</label>
+  <input name="url" value="{{ a.url }}" required>
+
+  <label>Short summary*</label>
+  <textarea name="short_summary" required>{{ a.short_summary }}</textarea>
+
+  <label>Primary BU*</label>
+  <select name="primary_bu" required>
+    {% for b in BU_OPTIONS %}
+      <option value="{{ b }}" {% if a.primary_bu==b %}selected{% endif %}>{{ b }}</option>
+    {% endfor %}
+  </select>
+
+  <label>Secondary BUs (multi-select)</label>
+  <select name="secondary_bus" multiple size="5">
+    {% for b in BU_OPTIONS %}
+      <option value="{{ b }}" {% if b in a.secondary_bus %}selected{% endif %}>{{ b }}</option>
+    {% endfor %}
+  </select>
+
+  <label>Use cases (multi-select)</label>
+  <select name="use_cases" multiple size="8">
+    {% for u in DEFAULT_USE_CASES %}
+      <option value="{{ u }}" {% if u in a.use_cases %}selected{% endif %}>{{ u }}</option>
+    {% endfor %}
+  </select>
+
+  <label>Asset type*</label>
+  <select name="asset_type" required>
+    {% for t in ASSET_TYPES %}
+      <option value="{{ t }}" {% if a.asset_type==t %}selected{% endif %}>{{ t }}</option>
+    {% endfor %}
+  </select>
+
+  <label>License flag*</label>
+  <select name="license_flag" required>
+    {% for l in LICENSE_FLAGS %}
+      <option value="{{ l }}" {% if a.license_flag==l %}selected{% endif %}>{{ l }}</option>
+    {% endfor %}
+  </select>
+
+  <label>License notes</label>
+  <textarea name="license_notes">{{ a.license_notes }}</textarea>
+
+  <div class="row">
+    <div>
+      <label>Readiness (0–5)</label>
+      <input name="readiness_score" type="number" min="0" max="5" value="{{ a.readiness_score }}">
+    </div>
+    <div>
+      <label>Engineering (0–5)</label>
+      <input name="engineering_score" type="number" min="0" max="5" value="{{ a.engineering_score }}">
+    </div>
+    <div>
+      <label>Maintenance (0–5)</label>
+      <input name="maintenance_score" type="number" min="0" max="5" value="{{ a.maintenance_score }}">
+    </div>
+  </div>
+
+  <label>Last validated on</label>
+  <input name="last_validated_on" value="{{ a.last_validated_on }}">
+
+  <label>Owner</label>
+  <input name="owner" value="{{ a.owner }}">
+
+  <label>How Excelra can leverage this</label>
+  <textarea name="excelra_leverage">{{ a.excelra_leverage }}</textarea>
+
+  <label>Notes</label>
+  <textarea name="notes">{{ a.notes }}</textarea>
+
+  <button type="submit">Save changes</button>
+</form>
+{% endblock %}

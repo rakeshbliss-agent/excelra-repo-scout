@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Add asset</h2>
+
+<form method="post" class="form">
+  <label>Name*</label>
+  <input name="name" required>
+
+  <label>URL*</label>
+  <input name="url" required>
+
+  <label>Short summary*</label>
+  <textarea name="short_summary" required></textarea>
+
+  <label>Primary BU*</label>
+  <select name="primary_bu" required>
+    {% for b in BU_OPTIONS %}
+      <option value="{{ b }}">{{ b }}</option>
+    {% endfor %}
+  </select>
+
+  <label>Secondary BUs (multi-select)</label>
+  <select name="secondary_bus" multiple size="5">
+    {% for b in BU_OPTIONS %}
+      <option value="{{ b }}">{{ b }}</option>
+    {% endfor %}
+  </select>
+  <div class="muted">Tip: Hold Ctrl while clicking to select multiple.</div>
+
+  <label>Use cases (multi-select)</label>
+  <select name="use_cases" multiple size="8">
+    {% for u in DEFAULT_USE_CASES %}
+      <option value="{{ u }}">{{ u }}</option>
+    {% endfor %}
+  </select>
+
+  <label>Asset type*</label>
+  <select name="asset_type" required>
+    {% for t in ASSET_TYPES %}
+      <option value="{{ t }}">{{ t }}</option>
+    {% endfor %}
+  </select>
+
+  <label>License flag*</label>
+  <select name="license_flag" required>
+    {% for l in LICENSE_FLAGS %}
+      <option value="{{ l }}">{{ l }}</option>
+    {% endfor %}
+  </select>
+
+  <label>License notes</label>
+  <textarea name="license_notes"></textarea>
+
+  <div class="row">
+    <div>
+      <label>Readiness (0–5)</label>
+      <input name="readiness_score" type="number" min="0" max="5" value="3">
+    </div>
+    <div>
+      <label>Engineering (0–5)</label>
+      <input name="engineering_score" type="number" min="0" max="5" value="3">
+    </div>
+    <div>
+      <label>Maintenance (0–5)</label>
+      <input name="maintenance_score" type="number" min="0" max="5" value="3">
+    </div>
+  </div>
+
+  <label>Last validated on</label>
+  <input name="last_validated_on" value="{{ today }}">
+
+  <label>Owner</label>
+  <input name="owner">
+
+  <label>How Excelra can leverage this</label>
+  <textarea name="excelra_leverage" placeholder="e.g., build curated dataset packs, integrate into GoStar enrichment, offer analytics/curation service, KG enrichment..."></textarea>
+
+  <label>Notes</label>
+  <textarea name="notes"></textarea>
+
+  <button type="submit">Save</button>
+</form>
+{% endblock %}
