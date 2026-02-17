@@ -421,5 +421,43 @@
     "owner": "Data Governance",
     "excelra_leverage": "Position Excelra’s curation/standardization offerings with an industry-standard framework; define internal metadata + provenance checklists.",
     "notes": "Use as governance anchor for ‘quality’ discussions."
-  }
+  },
+  {
+  "name": "Protein-GPT (Streamlit app)",
+  "url": "https://protein-gpt-8ewsjdynhhtqnr6oqxck5c.streamlit.app/",
+  "short_summary": "Interactive protein/sequence-focused chat app (Streamlit) for exploring protein biology and answering protein-related questions.",
+  "primary_bu": "Bioinformatics Services",
+  "secondary_bus": ["Cross-BU", "Scientific Products"],
+  "use_cases": ["Target identification", "RAG / Search"],
+  "asset_type": "App/UI",
+  "license_flag": "Yellow",
+  "license_notes": "Third-party app; validate usage terms, data handling, and any API/commercial constraints before internal rollout.",
+  "readiness_score": 3,
+  "engineering_score": 2,
+  "maintenance_score": 3,
+  "last_validated_on": "2026-02-17",
+  "owner": "Bioinformatics SME",
+  "excelra_leverage": "Use as an internal inspiration/demo for a protein copilot: accelerate SME exploration of targets/sequences, and potentially integrate a similar UX into GoBiom/target evidence workflows with Excelra-governed sources.",
+  "notes": "Treat as evaluation/reference unless we confirm provenance, privacy and licensing."
+},
+  {
+  "name": "PubMed.ai (AI literature search)",
+  "url": "https://www.pubmed.ai/search",
+  "short_summary": "AI-assisted PubMed-style literature discovery and Q&A interface to speed up evidence finding and summarization.",
+  "primary_bu": "ClinPharma Services",
+  "secondary_bus": ["Cross-BU", "Scientific Products", "Bioinformatics Services"],
+  "use_cases": ["RAG / Search", "Biomedical NLP / NER", "Target-disease evidence"],
+  "asset_type": "App/UI",
+  "license_flag": "Yellow",
+  "license_notes": "Validate terms of use, API availability, and redistribution/commercial constraints for internal or client-facing usage.",
+  "readiness_score": 4,
+  "engineering_score": 2,
+  "maintenance_score": 3,
+  "last_validated_on": "2026-02-17",
+  "owner": "ClinPharma SME",
+  "excelra_leverage": "Enable faster literature triage and evidence-pack creation for leaders/customers; can inform an Excelra RAG workflow grounded on curated sources and integrated into GoStar/GoBiom for target/disease landscapes.",
+  "notes": "Good candidate to benchmark against an internal Excelra literature copilot."
+}
+
 ]
+
