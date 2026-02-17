@@ -1,0 +1,37 @@
+body { font-family: Arial, sans-serif; margin: 0; background: #f6f7fb; }
+.topbar { display:flex; justify-content:space-between; padding:14px 18px; background:#111827; color:#fff; }
+.brand { font-weight:700; }
+.nav a { color:#fff; margin-left:12px; text-decoration:none; opacity:0.9; }
+.container { max-width: 1150px; margin: 20px auto; padding: 0 14px; }
+
+.flash { padding:10px 12px; border-radius:10px; margin:10px 0; }
+.flash.success { background:#e7f7ec; border:1px solid #b8ebc6; }
+.flash.error { background:#fdecec; border:1px solid #f5b7b7; }
+
+.filters { display:flex; gap:10px; flex-wrap:wrap; padding:12px; background:#fff; border-radius:12px; align-items:center; }
+.filters input, .filters select { padding:8px; border-radius:10px; border:1px solid #ddd; }
+
+.card { display:flex; gap:16px; background:#fff; border-radius:14px; padding:14px; margin:14px 0; box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
+.card-left { flex: 3; }
+.card-right { flex: 1; min-width: 220px; }
+.title { font-size: 18px; font-weight: 700; }
+.summary { margin: 6px 0 10px; }
+.meta { display:flex; flex-wrap:wrap; gap:10px; font-size: 13px; color:#374151; margin-bottom: 8px; }
+.muted { color:#6b7280; font-size: 12px; }
+.notes { margin-top:8px; }
+
+.badge { display:inline-block; padding:6px 10px; border-radius:999px; font-weight:700; font-size:12px; }
+.badge.green { background:#e7f7ec; border:1px solid #b8ebc6; }
+.badge.yellow { background:#fff7db; border:1px solid #f4d57a; }
+.badge.red { background:#fdecec; border:1px solid #f5b7b7; }
+
+.actions { display:flex; gap:10px; margin-top: 10px; align-items:center; }
+.btn { display:inline-block; padding:8px 12px; border-radius:10px; background:#111827; color:#fff; text-decoration:none; border:0; cursor:pointer; }
+.btn.danger { background:#b91c1c; }
+
+.form { background:#fff; padding:14px; border-radius:14px; box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
+.form label { display:block; margin-top:10px; font-weight: 700; font-size: 13px; color:#111827; }
+.form input, .form textarea, .form select { width:100%; padding:8px; margin-top:6px; border-radius:10px; border:1px solid #ddd; }
+.form textarea { height: 90px; }
+.row { display:flex; gap:12px; }
+.row > div { flex: 1; }
